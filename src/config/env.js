@@ -26,4 +26,17 @@ export const env = {
     KIOTVIET_CLIENT_ID: process.env.KIOT_CLIENT_ID,
     KIOTVIET_CLIENT_SECRET: process.env.KIOT_SECRET,
   },
+
+  SUPABASE: {
+    SERVICE_KEY: process.env.DATABASE_SERVICE_KEY,
+  },
+
+  LARK: {
+    APP_ID: process.env.LARK_APP_ID,
+    APP_SECRET: process.env.LARK_APP_SECRET,
+  },
+
+  AES_256_CBC: {
+    APP_SECRET_KEY: process.env.AES_256_CBC_APP_SECRET_KEY,
+  },
 };

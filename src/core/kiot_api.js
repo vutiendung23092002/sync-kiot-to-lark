@@ -1,5 +1,10 @@
 import http from "./http-client.js";
-import { KIOT_AUTH_URL, API_PATHS } from "../config/constants.js";
+import {
+  KIOT_PUBLIC_URL,
+  KIOT_AUTH_URL,
+  API_PATHS,
+} from "../config/constants.js";
+import { env } from "../config/env.js";
 
 export async function getAccessToken(clientId, clientSecret) {
   const params = {
@@ -21,5 +26,32 @@ export async function getAccessToken(clientId, clientSecret) {
       headers,
     }
   );
+  return res;
+}
+
+export async function getInvoices(accessToken, params) {
+  const headers = {
+    Retailer: env.KIOT.KIOTVIET_RETAILER,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  return await http.get(API_PATHS.KIOT_GET_INVOICES, {
+    baseURL: KIOT_PUBLIC_URL,
+    headers,
+    params,
+  });
+}
+
+export async function getInvoicesDetail(accessToken, id) {
+  const headers = {
+    Retailer: env.KIOT.KIOTVIET_RETAILER,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  const res = await http.get(`${API_PATHS.KIOT_GET_INVOICES}/${id}`, {
+    baseURL: KIOT_PUBLIC_URL,
+    headers,
+  });
+
   return res;
 }
