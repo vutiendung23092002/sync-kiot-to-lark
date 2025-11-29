@@ -33,8 +33,8 @@ export async function syncInvoicesToLark(
     }
   }
 
-  utils.writeJsonFile("./src/data/testProduct.json", products);
-  utils.writeJsonFile("./src/data/testProductCost.json", productCostMap);
+  // utils.writeJsonFile("./src/data/testProduct.json", products);
+  // utils.writeJsonFile("./src/data/testProductCost.json", productCostMap);
 
   const invoices = await fetchAllInvoices(
     accessTokenKiot,
@@ -76,7 +76,7 @@ export async function syncInvoicesToLark(
     }
   }
 
-  utils.writeJsonFile("./src/data/invoicesDetail.json", allInvoicesDetails);
+  // utils.writeJsonFile("./src/data/invoicesDetail.json", allInvoicesDetails);
 
   const invoiceFormatted = allInvoicesDetails.map((i) =>
     utils.formatInvoice(i)
@@ -86,11 +86,11 @@ export async function syncInvoicesToLark(
     utils.formatInvoiceDetail(inv, productCostMap)
   );
 
-  utils.writeJsonFile("./src/data/invoice_formatted.json", invoiceFormatted);
-  utils.writeJsonFile(
-    "./src/data/invoice_detail_formatted.json",
-    allInvoiceDetailsFormatted
-  );
+  // utils.writeJsonFile("./src/data/invoice_formatted.json", invoiceFormatted);
+  // utils.writeJsonFile(
+  //   "./src/data/invoice_detail_formatted.json",
+  //   allInvoiceDetailsFormatted
+  // );
 
   const ONE_DAY = 24 * 60 * 60 * 1000;
   const timestampFrom = utils.vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
