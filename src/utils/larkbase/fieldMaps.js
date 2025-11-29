@@ -1,5 +1,5 @@
-
 export const INVOICE_FIELD_MAP = {
+  purchase_date: "Ngày thanh toán",
   id: "ID hoá đơn", // ID hoá đơn
   create_date: "Ngày tạo hoá đơn", // Ngày tạo hoá đơn
   code: "Mã hoá đơn", // Mã hoá đơn
@@ -22,7 +22,7 @@ export const INVOICE_FIELD_MAP = {
 
   sur_value: "Phụ thu",
 
-  status_value: "Trạng thái đơn hàng",
+  status_value: "Trạng thái hoá đơn",
   partner_delivery_name: "Đơn vị vận chuyển",
   invoice_delivery_code: "Mã đơn GHN",
   cod: "COD",
@@ -34,6 +34,7 @@ export const INVOICE_FIELD_MAP = {
 export const INVOICE_TYPE_MAP = {
   id: 1,
   create_date: 5,
+  purchase_date: 5,
   code: 1,
   order_code: 1,
 
@@ -66,6 +67,7 @@ export const INVOICE_TYPE_MAP = {
 export const INVOICE_UI_TYPE_MAP = {
   id: "Text",
   create_date: "DateTime",
+  purchase_date: "DateTime",
   code: "Text",
   order_code: "Text",
 
@@ -95,3 +97,86 @@ export const INVOICE_UI_TYPE_MAP = {
   hash: "Text",
 };
 
+export const INVOICE_DETAIL_FIELD_MAP = {
+  purchase_date: "Ngày thanh toán",
+  id: "ID",
+  order_id: "Order_ID",
+  order_code: "Mã đơn hàng",
+  invoice_id: "ID đơn hàng",
+  invoice_code: "Mã hoá đơn",
+  create_date: "Ngày tạo",
+  status_value: "Trạng thái hoá đơn",
+  sold_by_name: "Nhân viên",
+  customer_code: "Mã khách hàng",
+  customer_name: "Tên khách hàng",
+  product_id: "Product ID",
+  product_code: "Mã sản phẩm",
+  product_name: "Tên sản phẩm",
+  category_name: "Danh mục",
+  cost_snapshot: "Giá vốn",
+  quantity: "Số lượng",
+  price: "Đơn giá",
+  discount: "Giảm giá",
+  discount_ratio: "Giảm giá theo %",
+  sub_total: "Tổng giá trị",
+  note: "Ghi chú",
+  serial_numbers: "IMEI",
+  return_quantity: "Số lượng hoàn",
+  hash: "hash",
+};
+
+export const INVOICE_DETAIL_TYPE_MAP = {
+  id: 1,
+  order_id: 1,
+  order_code: 1,
+  invoice_id: 1,
+  invoice_code: 1,
+  purchase_date: 5,
+  create_date: 5,
+  status_value: 1,
+  sold_by_name: 1,
+  cost_snapshot: 2,
+  customer_code: 1,
+  customer_name: 1,
+  product_id: 1,
+  product_code: 1,
+  product_name: 1,
+  category_name: 1,
+  quantity: 2,
+  price: 2,
+  discount: 2,
+  discount_ratio: 2,
+  sub_total: 2,
+  note: 1,
+  serial_numbers: 1,
+  return_quantity: 2,
+  hash: 1,
+};
+
+export const INVOICE_DETAIL_UI_TYPE_MAP = {
+  id: "Text",
+  order_id: "Text",
+  order_code: "Text",
+  invoice_id: "Text",
+  invoice_code: "Text",
+  purchase_date: "DateTime",
+  create_date: "DateTime",
+  status_value: "Text",
+  sold_by_name: "Text",
+  customer_code: "Text",
+  customer_name: "Text",
+  product_id: "Text",
+  product_code: "Text",
+  product_name: "Text",
+  category_name: "Text",
+  quantity: "Number",
+  price: "Currency",
+  discount: "Currency",
+  discount_ratio: "Currency",
+  sub_total: "Currency",
+  note: "Text",
+  serial_numbers: "Text",
+  return_quantity: "Number",
+  cost_snapshot: "Currency",
+  hash: "Text",
+};

@@ -82,14 +82,15 @@ http.interceptors.response.use(
     console.error(
       `[${status || "ERR"}] ${
         error.config?.url
-      }\n→ TikTok API Error [${code}]: ${message}`
+      }\n→ API Error [${code}]: ${message}`
     );
 
     if (error.response?.data) {
       console.log("Response:", JSON.stringify(error.response.data, null, 2));
     }
 
-    throw error.response?.data || error;
+    // QUAN TRỌNG: Throw nguyên error, không bóc tách
+    throw error;
   }
 );
 

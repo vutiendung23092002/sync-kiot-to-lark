@@ -55,3 +55,16 @@ export async function getInvoicesDetail(accessToken, id) {
 
   return res;
 }
+
+export async function getProducts(accessToken, params) {
+  const headers = {
+    Retailer: env.KIOT.KIOTVIET_RETAILER,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  return await http.get(API_PATHS.KIOT_GET_PRODUCTS, {
+    baseURL: KIOT_PUBLIC_URL,
+    headers,
+    params,
+  });
+}

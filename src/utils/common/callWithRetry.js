@@ -34,11 +34,15 @@ export async function callWithRetry(fn, retries = 5, delay = 1500) {
     try {
       return await fn();
     } catch (err) {
-      const code = err?.response?.data?.code;
+      const kiotErrorCode = err?.response?.data?.responseStatus?.errorCode;
 
-      if (code === 40100) {
+      const httpStatus = err?.response?.status;
+
+      const isRateLimit = httpStatus === 429 || kiotErrorCode === "RateLimited";
+
+      if (isRateLimit) {
         console.log(
-          `⏳ Rate limit - chờ ${delay}ms rồi retry (lần ${attempt}/${retries})`
+          `⏳ Kiot rate limit - nghỉ ${delay}ms rồi retry (lần ${attempt}/${retries})`
         );
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
@@ -46,5 +50,6 @@ export async function callWithRetry(fn, retries = 5, delay = 1500) {
       }
     }
   }
+
   throw new Error("❌ Retry quá số lần cho phép");
 }

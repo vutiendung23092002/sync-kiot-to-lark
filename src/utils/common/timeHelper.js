@@ -116,3 +116,15 @@ export function toTikTokGmvDateFormat(inputStr) {
   const date = String(dt.getDate()).padStart(2, "0");
   return `${year}-${month}-${date}`;
 }
+
+/**
+ * Convert từ "YYYY/MM/DD HH:mm:ss"
+ * sang "YYYY-MM-DDTHH:mm:ss"
+ * (giữ nguyên giờ, chỉ đổi format).
+ *
+ * @param {string} inputStr
+ * @returns {string}
+ */
+export function toIsoLike(inputStr) {
+  return inputStr.replace(/\//g, "-").replace(" ", "T");
+}
