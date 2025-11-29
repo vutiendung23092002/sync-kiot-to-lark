@@ -14,7 +14,7 @@ async function main() {
 
   // Cấu hình "Hoá đơn"
   const invoiceTableName = "4.Hóa đơn";
-  const tableInvoiceDetailName = "4.Chi tiết hoá đơn - ";
+  const tableInvoiceDetailName = "4.Chi tiết hoá đơn";
   const invoiceFieldFilterDate = "Ngày thanh toán";
   const excludeUpdateField = "Giá vốn";
 
