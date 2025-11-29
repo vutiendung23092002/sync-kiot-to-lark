@@ -2,7 +2,7 @@ import * as sync from "./src/sync/index.js";
 
 async function main() {
   // Cấu hình call api
-  const chunkSize = 7; //Số api call trong 1 chunk
+  const chunkSize = 10; //Số api call trong 1 chunk
   const chunkDelay = 300; // 0.3s - thời gian delay giữa mỗi chunk
   const retryDelay = 500; //0.5s - thời gian delay mỗi khi chunk lỗi - retry
   const retries = 50; // restry chunk đến l100 mà vẫn lỗi thì dừng ctrinh và nhả error
