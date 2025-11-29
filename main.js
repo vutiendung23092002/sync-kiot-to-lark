@@ -9,13 +9,13 @@ async function main() {
 
   // Cấu hình chung
   const baseId = "M9w2bqcWcafPXcsxYuNlZUhhgSf";
-  const from = "2025/09/01 00:00:00";
+  const from = "2025/01/01 00:00:00";
   const to = "2025/12/31 23:59:59";
 
   // Cấu hình "Hoá đơn"
   const invoiceTableName = "4.Hóa đơn";
-  const tableInvoiceDetailName = "4.Chi tiết hoá đơn";
-  const invoiceFieldFilterDate = "Ngày thanh toán";
+  const tableInvoiceDetailName = "4.Chi tiết hoá đơn -test";
+  const invoiceFieldFilterDate = "Ngày thanh toán -test";
   const excludeUpdateField = "Giá vốn";
 
   console.time("syncInvoices");

@@ -35,18 +35,24 @@ export async function callWithRetry(fn, retries = 5, delay = 1500) {
       return await fn();
     } catch (err) {
       const kiotErrorCode = err?.response?.data?.responseStatus?.errorCode;
-
       const httpStatus = err?.response?.status;
 
       const isRateLimit = httpStatus === 429 || kiotErrorCode === "RateLimited";
 
-      if (isRateLimit) {
+      const isNetworkError =
+        err.code === "ECONNRESET" ||
+        err.code === "ETIMEDOUT" ||
+        err.message?.includes("socket hang up");
+
+      if (isRateLimit || isNetworkError) {
         console.log(
-          `⏳ Kiot rate limit - nghỉ ${delay}ms rồi retry (lần ${attempt}/${retries})`
+          `⏳ Retry vì ${
+            isRateLimit ? "Rate Limit" : "Network Error"
+          } - nghỉ ${delay}ms (lần ${attempt}/${retries})`
         );
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
-        throw err;
+        throw err; // lỗi khác thì bắn luôn
       }
     }
   }
