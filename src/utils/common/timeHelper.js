@@ -139,7 +139,5 @@ export function toIsoLike(inputStr) {
 
 export function kiotDateToVN(dateStr) {
   if (!dateStr) return "";
-
-  // Kiot đã là giờ VN → giữ nguyên
-  return dateStr.replace("T", " ").split(".")[0];
+  return dateStr.replace("T", " ").split(".")[0] + "+07:00";
 }
