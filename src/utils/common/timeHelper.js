@@ -140,8 +140,6 @@ export function toIsoLike(inputStr) {
 export function kiotDateToVN(dateStr) {
   if (!dateStr) return "";
 
-  return dayjs
-    .utc(dateStr) // coi Kiot trả về là UTC
-    .tz("Asia/Ho_Chi_Minh")
-    .format("YYYY/MM/DD HH:mm:ss");
+  // Kiot đã là giờ VN → giữ nguyên
+  return dateStr.replace("T", " ").split(".")[0];
 }
