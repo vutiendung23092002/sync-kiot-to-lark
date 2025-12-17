@@ -10,8 +10,8 @@ export function formatInvoice(invoice) {
 
   const formatted = {
     id: invoice?.id || "", // ID hoá đơn
-    create_date: invoice?.createdDate || "", // Ngày tạo hoá đơn
-    purchase_date: invoice?.purchaseDate || "",
+    create_date: kiotDateToVN(invoice?.createdDate) || "", // Ngày tạo hoá đơn
+    purchase_date: kiotDateToVN(invoice?.purchaseDate) || "",
     code: invoice?.code || "", // Mã hoá đơn
     order_code: invoice?.orderCode || "", // Mã đơn hàng
 
@@ -58,8 +58,8 @@ export function formatInvoiceDetail(invoice, productCostMap) {
       order_code: invoice?.orderCode || "",
       invoice_id: invoice?.id || "",
       invoice_code: invoice?.code || "",
-      purchase_date: invoice?.purchaseDate || "",
-      create_date: invoice?.createdDate || "",
+      purchase_date: kiotDateToVN(invoice?.purchaseDate) || "",
+      create_date: kiotDateToVN(invoice?.createdDate) || "",
       status_value: invoice?.statusValue || "",
       sold_by_name: invoice?.soldByName || "",
       customer_code: invoice?.customerCode || "",
