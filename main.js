@@ -9,7 +9,7 @@ async function main() {
 
   // Cấu hình chung
   const baseId = "M9w2bqcWcafPXcsxYuNlZUhhgSf";
-  const from = "2025/01/01 00:00:00";
+  const from = "2025/12/01 00:00:00";
   const to = "2025/12/31 23:59:59";
 
   // Cấu hình "Hoá đơn"
