@@ -1,3 +1,11 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+
 /**
  * Chuyển thời gian Việt Nam (local time) sang timestamp UTC tính bằng giây.
  *
