@@ -128,3 +128,12 @@ export function toTikTokGmvDateFormat(inputStr) {
 export function toIsoLike(inputStr) {
   return inputStr.replace(/\//g, "-").replace(" ", "T");
 }
+
+export function kiotDateToVN(dateStr) {
+  if (!dateStr) return "";
+
+  return dayjs
+    .utc(dateStr) // coi Kiot trả về là UTC
+    .tz("Asia/Ho_Chi_Minh")
+    .format("YYYY/MM/DD HH:mm:ss");
+}
