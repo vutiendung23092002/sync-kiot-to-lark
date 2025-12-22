@@ -13,8 +13,8 @@ async function main() {
   const to = "2025/12/31 23:59:59";
 
   // Cấu hình "Hoá đơn"
-  const invoiceTableName = "Hoá đơn cũ + mới";
-  const tableInvoiceDetailName = "Chi tiết hoá đơn cũ + mới";
+  const invoiceTableName = "4.Hoá đơn cũ + mới";
+  const tableInvoiceDetailName = "4.Chi tiết hoá đơn cũ + mới";
   const invoiceFieldFilterDate = "Ngày thanh toán";
   const excludeUpdateField = "Giá vốn";
 
