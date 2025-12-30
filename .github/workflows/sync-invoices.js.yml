@@ -38,7 +38,7 @@ jobs:
           LARK_BASE_ID: ${{ vars.LARK_BASE_ID }}
           LARK_TABLE_INVOICE_NAME: ${{ vars.LARK_TABLE_INVOICE_NAME }}
           LARK_TABLE_INVOICE_DETAIL_NAME: ${{ vars.LARK_TABLE_INVOICE_DETAIL_NAME }}
-          LARK.LARK_TABLE_INVOICE__FROM: ${{ vars.LARK_TABLE_INVOICE__FROM }}
+          LARK_TABLE_INVOICE__FROM: ${{ vars.LARK_TABLE_INVOICE__FROM }}
           LARK_TABLE_INVOICE__TO: ${{ vars.LARK_TABLE_INVOICE__TO }}
 
         run: node sync-invoices.js
