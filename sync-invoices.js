@@ -1,4 +1,5 @@
 import * as sync from "./src/sync/index.js";
+import { env } from "./src/config/env.js";
 
 async function syncInvoices() {
   // Cấu hình call api
@@ -8,13 +9,13 @@ async function syncInvoices() {
   const retries = 50; // restry chunk đến l100 mà vẫn lỗi thì dừng ctrinh và nhả error
 
   // Cấu hình chung
-  const baseId = "M9w2bqcWcafPXcsxYuNlZUhhgSf";
-  const from = "2025/09/01 00:00:00";
-  const to = "2025/12/31 23:59:59";
+  const baseId = env.LARK.BASE_ID;
+  const from = env.LARK.LARK_TABLE_INVOICE__FROM;
+  const to = env.LARK.LARK_TABLE_INVOICE__TO;
 
   // Cấu hình "Hoá đơn"
-  const invoiceTableName = "4.Hoá đơn cũ + mới";
-  const tableInvoiceDetailName = "4.Chi tiết hoá đơn cũ + mới";
+  const invoiceTableName = env.LARK.TABLE_INVOICES_NAME;
+  const tableInvoiceDetailName = env.LARK.TABLE_INVOICES_DETAIL_NAME;
   const invoiceFieldFilterDate = "Ngày thanh toán";
   const excludeUpdateField = "Giá vốn";
 

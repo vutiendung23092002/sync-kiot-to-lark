@@ -1,4 +1,4 @@
-import * as kiotApi from "../../core/kiot_api.js";
+import * as kiotApi from "../../core/kiot-api.js";
 
 /**
  * Lấy toàn bộ danh sách hàng hóa KiotViet bằng phân trang currentItem.
@@ -25,6 +25,8 @@ export async function fetchAllProducts(accessToken, filters = {}, pageSize = 100
       pageSize,
       ...filters
     };
+
+    console.log(params);
 
     if (cursor) params.currentItem = cursor;
 

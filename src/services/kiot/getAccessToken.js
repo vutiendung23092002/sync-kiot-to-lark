@@ -1,4 +1,4 @@
-import * as kiotApi from "../../core/kiot_api.js";
+import * as kiotApi from "../../core/kiot-api.js";
 import { env } from "../../config/env.js";
 import { supabase } from "../../core/supabase-client.js";
 import { encrypt, decrypt } from "../../utils/common/AES-256-CBC.js";

@@ -1,4 +1,4 @@
-import * as kiotApi from "../../core/kiot_api.js";
+import * as kiotApi from "../../core/kiot-api.js";
 
 export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
   let cursor = 0;

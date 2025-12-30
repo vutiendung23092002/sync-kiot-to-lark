@@ -1,3 +1,57 @@
+export const PRODUCT_FIELD_MAP = {
+  id: "Id",
+  code: "Mã sản phẩm",
+  name: "Sản phẩm",
+  full_name: "Tên đầy đủ",
+  category_name: "Tên danh mục",
+  base_price: "Giá chung",
+  inventories_cost: "Giá vốn",
+  inventories_onHand: "Tồn kho",
+  dealer_price: "Giá đại lý",
+  distribution_price: "Giá phân phối",
+  facebook_price: "Giá Facebook",
+  tmdt_price: "Giá sàn TMĐT",
+  is_active: "Đang bán",
+  has_variants: "Có biến thể",
+  hash: "hash",
+};
+
+export const PRODUCT_TYPE_MAP = {
+  id: 2,
+  code: 1,
+  name: 1,
+  full_name: 1,
+  category_name: 1,
+  base_price: 2,
+  inventories_cost: 2,
+  inventories_onHand: 2,
+  dealer_price: 2,
+  distribution_price: 2,
+  facebook_price: 2,
+  tmdt_price: 2,
+  is_active: 1,
+  has_variants: 1,
+  hash: 1,
+};
+
+export const PRODUCT_UI_TYPE_MAP = {
+  id: "Number",
+  code: "Text",
+  name: "Text",
+  full_name: "Text",
+  category_name: "Text",
+  base_price: "Currency",
+  inventories_cost: "Currency",
+  inventories_onHand: "Currency",
+  dealer_price: "Currency",
+  distribution_price: "Currency",
+  facebook_price: "Currency",
+  tmdt_price: "Currency",
+  is_active: "Text",
+  has_variants: "Text",
+  hash: "Text",
+};
+
 export const INVOICE_FIELD_MAP = {
   purchase_date: "Ngày thanh toán",
   id: "ID hoá đơn", // ID hoá đơn

@@ -1,4 +1,4 @@
-import * as kiotApi from "../core/kiot_api.js";
+import * as kiotApi from "../core/kiot-api.js";
 import * as utils from "../utils/index.js";
 import * as serviceKiot from "../services/kiot/index.js";
 import { fetchAllInvoices } from "../services/kiot/fetchAllInvoices.js";

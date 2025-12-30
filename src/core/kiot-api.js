@@ -62,9 +62,11 @@ export async function getProducts(accessToken, params) {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  return await http.get(API_PATHS.KIOT_GET_PRODUCTS, {
+  const res = await http.get(API_PATHS.KIOT_GET_PRODUCTS, {
     baseURL: KIOT_PUBLIC_URL,
     headers,
     params,
   });
+
+  return res;
 }
