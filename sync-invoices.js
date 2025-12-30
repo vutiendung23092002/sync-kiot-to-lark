@@ -13,6 +13,8 @@ async function syncInvoices() {
   const from = env.LARK.LARK_TABLE_INVOICE__FROM;
   const to = env.LARK.LARK_TABLE_INVOICE__TO;
 
+  console.log(`From: ${from} - To: ${to}`)
+
   // Cấu hình "Hoá đơn"
   const invoiceTableName = env.LARK.TABLE_INVOICES_NAME;
   const tableInvoiceDetailName = env.LARK.TABLE_INVOICES_DETAIL_NAME;
