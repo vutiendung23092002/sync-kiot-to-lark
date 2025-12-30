@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --only=production
 
-      - name: Run main.js
+      - name: Run sync-invoices.js
         env:
           KIOT_SECRET: ${{ secrets.KIOT_SECRET }}
           KIOT_CLIENT_ID: ${{ secrets.KIOT_CLIENT_ID }}
@@ -36,4 +36,4 @@ jobs:
           DATABASE_SERVICE_KEY: ${{ secrets.DATABASE_SERVICE_KEY }}
           AES_256_CBC_APP_SECRET_KEY: ${{ secrets.AES_256_CBC_APP_SECRET_KEY }}
 
-        run: node main.js
+        run: node sync-invoices.js

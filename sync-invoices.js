@@ -1,6 +1,6 @@
 import * as sync from "./src/sync/index.js";
 
-async function main() {
+async function syncInvoices() {
   // Cấu hình call api
   const chunkSize = 10; //Số api call trong 1 chunk
   const chunkDelay = 300; // 0.3s - thời gian delay giữa mỗi chunk
@@ -35,7 +35,7 @@ async function main() {
   console.timeEnd("syncInvoices");
 }
 
-main();
+syncInvoices();
 // syncInvoices: 2:55.240 (m:ss.mmm) ~ chunkSize = 0 
 // syncInvoices: 2:12.304 (m:ss.mmm) ~ chunkSize = 6 - retryDelay = 2000 
 // syncInvoices: 2:11.994 (m:ss.mmm) ~ chunkSize = 6 - retryDelay = 500 
