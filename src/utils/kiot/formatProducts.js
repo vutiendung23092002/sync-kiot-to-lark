@@ -26,6 +26,7 @@ export function formartProducts(products = []) {
       distribution_price: getPriceByBookName(priceBooks, "Phân Phối"),
       facebook_price: getPriceByBookName(priceBooks, "Giá FB"),
       tmdt_price: getPriceByBookName(priceBooks, "Giá sàn TMDT"),
+      ctv_price: getPriceByBookName(priceBooks, "Bảng giá CTV"),
 
       is_active: item?.isActive == true ? "Đang bán" : "Ngừng bán",
       has_variants: item?.hasVariants == true ? "Có" : "Không",

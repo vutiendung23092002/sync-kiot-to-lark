@@ -1,7 +1,5 @@
-import * as kiotApi from "../core/kiot-api.js";
 import * as utils from "../utils/index.js";
 import * as serviceKiot from "../services/kiot/index.js";
-import { fetchAllInvoices } from "../services/kiot/fetchAllInvoices.js";
 import { fetchAllProducts } from "../services/kiot/fetchAllProducts.js";
 import { syncDataToLarkBaseFilterDate } from "./syncToLarkFilterDate.js";
 import { larkClient } from "../core/larkbase-client.js";
@@ -21,7 +19,7 @@ export async function syncProductsToLark(
     includePricebook: true,
   });
 
-  utils.writeJsonFile("../data/products.json", products);
+  utils.writeJsonFile("./src/data/products.json", products);
 
   const productFormarted = formartProducts(products);
 
