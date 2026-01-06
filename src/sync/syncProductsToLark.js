@@ -21,7 +21,7 @@ export async function syncProductsToLark(
     includePricebook: true,
   });
 
-  console.log(products[0]);
+  utils.writeJsonFile("../data/products.json", products);
 
   const productFormarted = formartProducts(products);
 
