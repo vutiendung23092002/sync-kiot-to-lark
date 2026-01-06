@@ -1,4 +1,5 @@
 import * as kiotApi from "../../core/kiot-api.js";
+import { delay } from "../../utils/index.js";
 
 /**
  * Lấy toàn bộ danh sách hàng hóa KiotViet bằng phân trang currentItem.
@@ -43,6 +44,7 @@ export async function fetchAllProducts(accessToken, filters = {}, pageSize = 100
     cursor = all.length;
 
     if (res.data.length < pageSize) break;
+    delay(200);
   }
 
   return all;

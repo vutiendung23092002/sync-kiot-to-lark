@@ -1,7 +1,7 @@
 import * as kiotApi from "../../core/kiot-api.js";
 import { delay } from "../../utils/index.js";
 
-export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
+export async function fetchAllCustomers(accessToken, pageSize = 100) {
   let cursor = 0;
   let all = [];
   console.log(pageSize);
@@ -9,20 +9,22 @@ export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
   while (true) {
     const params = {
       pageSize,
-      fromPurchaseDate: from,
-      toPurchaseDate: to,
+      includeTotal: true,
+      includeRemoveIds: true,
+      includeCustomerGroup: true,
+      includeCustomerSocial: true,
     };
 
     if (cursor) params.currentItem = cursor;
 
-    const res = await kiotApi.getInvoices(accessToken, params);
+    const res = await kiotApi.getCustommer(accessToken, params);
 
     if (!res?.data || res.data.length === 0) break;
 
     all.push(...res.data);
 
     console.log(
-      `Fetched ${res.data.length}, total_page: ${all.length}, cursor=${cursor}, total_invoices=${res.total}`
+      `Fetched ${res.data.length}, total_page: ${all.length}, cursor=${cursor}, total_customer=${res.total}`
     );
 
     cursor = all.length;
