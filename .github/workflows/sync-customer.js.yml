@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --only=production
 
-      - name: Run sync-customers.js
+      - name: Run sync-customer.js
         env:
           KIOT_SECRET: ${{ secrets.KIOT_SECRET }}
           KIOT_CLIENT_ID: ${{ secrets.KIOT_CLIENT_ID }}
@@ -38,4 +38,4 @@ jobs:
           LARK_BASE_ID: ${{ vars.LARK_BASE_ID }}
           LARK_TABLE_CUSTOMER_NAME: ${{ vars.LARK_TABLE_CUSTOMER_NAME }}
 
-        run: node sync-customers.js
+        run: node sync-customer.js
