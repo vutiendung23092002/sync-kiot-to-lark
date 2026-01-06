@@ -21,6 +21,8 @@ export async function syncProductsToLark(
     includePricebook: true,
   });
 
+  console.log(products[0]);
+
   const productFormarted = formartProducts(products);
 
   const ONE_DAY = 24 * 60 * 60 * 1000;
