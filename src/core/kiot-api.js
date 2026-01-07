@@ -85,3 +85,18 @@ export async function getCustommer(accessToken, params) {
 
   return res;
 }
+
+export async function getCashflow(accessToken, params) {
+  const headers = {
+    Retailer: env.KIOT.KIOTVIET_RETAILER,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  const res = await http.get(API_PATHS.KIOT_CASH_FLOW, {
+    baseURL: KIOT_PUBLIC_URL,
+    headers,
+    params,
+  });
+
+  return res;
+}
