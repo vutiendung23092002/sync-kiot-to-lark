@@ -1,5 +1,6 @@
 import * as kiotApi from "../../core/kiot-api.js";
 import { delay } from "../../utils/index.js";
+import { callWithRetry } from "../../utils/common/callWithRetry.js";
 
 /**
  * Lấy toàn bộ danh sách hàng hóa KiotViet bằng phân trang currentItem.
@@ -31,7 +32,9 @@ export async function fetchAllProducts(accessToken, filters = {}, pageSize = 100
 
     if (cursor) params.currentItem = cursor;
 
-    const res = await kiotApi.getProducts(accessToken, params);
+    const res = await callWithRetry(() =>
+      kiotApi.getProducts(accessToken, params)
+    );
 
     if (!res?.data || res.data.length === 0) break;
 
