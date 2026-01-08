@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI sync invoice to lark
+name: Node.js CI sync return to lark
 
 on:
   schedule:
@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --only=production
 
-      - name: Run sync-invoices.js
+      - name: Run sync-return.js
         env:
           KIOT_SECRET: ${{ secrets.KIOT_SECRET }}
           KIOT_CLIENT_ID: ${{ secrets.KIOT_CLIENT_ID }}
@@ -36,9 +36,7 @@ jobs:
           DATABASE_SERVICE_KEY: ${{ secrets.DATABASE_SERVICE_KEY }}
           AES_256_CBC_APP_SECRET_KEY: ${{ secrets.AES_256_CBC_APP_SECRET_KEY }}
           LARK_BASE_ID: ${{ vars.LARK_BASE_ID }}
-          LARK_TABLE_INVOICE_NAME: ${{ vars.LARK_TABLE_INVOICE_NAME }}
-          LARK_TABLE_INVOICE_DETAIL_NAME: ${{ vars.LARK_TABLE_INVOICE_DETAIL_NAME }}
-          LARK_TABLE_INVOICE__FROM: ${{ vars.LARK_TABLE_INVOICE__FROM }}
-          LARK_TABLE_INVOICE__TO: ${{ vars.LARK_TABLE_INVOICE__TO }}
+          LARK_TABLE_RETURN_NAME: ${{ vars.LARK_TABLE_RETURN_NAME }}
+          LARK_TABLE_RETURN_DETAILS_NAME: ${{ vars.LARK_TABLE_RETURN_DETAILS_NAME }}
 
-        run: node sync-invoices.js
+        run: node sync-return.js
