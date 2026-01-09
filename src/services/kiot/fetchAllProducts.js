@@ -1,40 +1,25 @@
-import * as kiotApi from "../../core/kiot-api.js";
-import { delay } from "../../utils/index.js";
-import { callWithRetry } from "../../utils/common/callWithRetry.js";
+import { getProducts } from "../../core/kiot-api.js";
+import { delay, callWithRetry } from "../../utils/index.js";
 
-/**
- * Lấy toàn bộ danh sách hàng hóa KiotViet bằng phân trang currentItem.
- *
- * @param {string} accessToken
- * @param {object} filters - Các filter tự truyền vào, ví dụ:
- *   {
- *      includeInventory: true,
- *      includePricebook: true,
- *      isActive: true,
- *      categoryId: 123,
- *      ...
- *   }
- * @param {number} pageSize - Số lượng sản phẩm mỗi page (max 100)
- *
- * @returns {Promise<Array>}
- */
-export async function fetchAllProducts(accessToken, filters = {}, pageSize = 100) {
+export async function fetchAllProducts(
+  accessToken,
+  filters = {},
+  pageSize = 100
+) {
   let cursor = 0;
   let all = [];
 
   while (true) {
     const params = {
       pageSize,
-      ...filters
+      ...filters,
     };
 
     console.log(params);
 
     if (cursor) params.currentItem = cursor;
 
-    const res = await callWithRetry(() =>
-      kiotApi.getProducts(accessToken, params)
-    );
+    const res = await callWithRetry(() => getProducts(accessToken, params));
 
     if (!res?.data || res.data.length === 0) break;
 

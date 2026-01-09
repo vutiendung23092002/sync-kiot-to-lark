@@ -10,8 +10,8 @@ async function syncInvoices() {
 
   // Cấu hình chung
   const baseId = env.LARK.BASE_ID;
-  const from = env.LARK.LARK_TABLE_INVOICE__FROM;
-  const to = env.LARK.LARK_TABLE_INVOICE__TO;
+  const from = env.LARK.TABLE_INVOICE__FROM;
+  const to = env.LARK.TABLE_INVOICE__TO;
 
   console.log(`From: ${from} - To: ${to}`)
 

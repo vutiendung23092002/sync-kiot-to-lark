@@ -77,7 +77,7 @@ export async function getCustommer(accessToken, params) {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  const res = await http.get(API_PATHS.KIOT_GET_CUSTOMMERS, {
+  const res = await http.get(API_PATHS.KIOT_GET_CUSTOMERS, {
     baseURL: KIOT_PUBLIC_URL,
     headers,
     params,
@@ -92,7 +92,7 @@ export async function getCashflow(accessToken, params) {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  const res = await http.get(API_PATHS.KIOT_CASH_FLOW, {
+  const res = await http.get(API_PATHS.KIOT_CASH_FLOWS, {
     baseURL: KIOT_PUBLIC_URL,
     headers,
     params,
@@ -107,7 +107,22 @@ export async function getReturn(accessToken, params) {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  const res = await http.get(API_PATHS.KIOT_GET_RETURN, {
+  const res = await http.get(API_PATHS.KIOT_GET_RETURNS, {
+    baseURL: KIOT_PUBLIC_URL,
+    headers,
+    params,
+  });
+
+  return res;
+}
+
+export async function getSuppliers(accessToken, params) {
+  const headers = {
+    Retailer: env.KIOT.KIOTVIET_RETAILER,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  const res = await http.get(API_PATHS.KIOT_GET_SUPPLIERS, {
     baseURL: KIOT_PUBLIC_URL,
     headers,
     params,

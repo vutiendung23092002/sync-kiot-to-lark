@@ -7,7 +7,8 @@ export const API_PATHS = {
     KIOT_GET_INVOICES : "/invoices",
     KIOT_GET_PRICEBOOKS: "/pricebooks",
     KIOT_GET_PRODUCTS: "/products",
-    KIOT_GET_CUSTOMMERS: "/customers",
-    KIOT_CASH_FLOW: "/cashflow",
-    KIOT_GET_RETURN: "/returns",
+    KIOT_GET_CUSTOMERS: "/customers",
+    KIOT_CASH_FLOWS: "/cashflow",
+    KIOT_GET_RETURNS: "/returns",
+    KIOT_GET_SUPPLIERS: "/suppliers",
 };

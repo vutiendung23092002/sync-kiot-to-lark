@@ -1,6 +1,5 @@
-import * as kiotApi from "../../core/kiot-api.js";
-import { delay } from "../../utils/index.js";
-import { callWithRetry } from "../../utils/common/callWithRetry.js";
+import { getReturn } from "../../core/kiot-api.js";
+import { delay, callWithRetry } from "../../utils/index.js";
 
 export async function fetchAllReturns(accessToken, from, to, pageSize = 100) {
   let cursor = 0;
@@ -16,9 +15,7 @@ export async function fetchAllReturns(accessToken, from, to, pageSize = 100) {
 
     if (cursor) params.currentItem = cursor;
 
-    const res = await callWithRetry(() =>
-      kiotApi.getReturn(accessToken, params)
-    );
+    const res = await callWithRetry(() => getReturn(accessToken, params));
 
     if (!res?.data || res.data.length === 0) break;
 

@@ -1,8 +1,25 @@
-import * as kiotApi from "../core/kiot-api.js";
-import * as utils from "../utils/index.js";
-import * as serviceKiot from "../services/kiot/index.js";
-import { fetchAllInvoices } from "../services/kiot/fetchAllInvoices.js";
-import { fetchAllProducts } from "../services/kiot/fetchAllProducts.js";
+import {
+  getAccessTokenEnvCloud,
+  fetchAllProducts,
+  fetchAllInvoices,
+} from "../services/kiot/index.js";
+import { getInvoicesDetail } from "../core/kiot-api.js";
+import {
+  formatInvoice,
+  INVOICE_FIELD_MAP,
+  INVOICE_TYPE_MAP,
+  INVOICE_UI_TYPE_MAP,
+  formatInvoiceDetail,
+  INVOICE_DETAIL_FIELD_MAP,
+  INVOICE_DETAIL_TYPE_MAP,
+  INVOICE_DETAIL_UI_TYPE_MAP,
+  writeJsonFile,
+  toIsoLike,
+  callWithRetry,
+  chunkArray,
+  delay,
+  vnTimeToUTCTimestampMiliseconds,
+} from "../utils/index.js";
 import { syncDataToLarkBaseFilterDate } from "./syncToLarkFilterDate.js";
 import { larkClient } from "../core/larkbase-client.js";
 
@@ -19,7 +36,7 @@ export async function syncInvoicesToLark(
   retryDelay,
   retries
 ) {
-  const accessTokenKiot = await serviceKiot.getAccessTokenEnvCloud();
+  const accessTokenKiot = await getAccessTokenEnvCloud();
 
   const products = await fetchAllProducts(accessTokenKiot, {
     includeInventory: true,
@@ -33,19 +50,17 @@ export async function syncInvoicesToLark(
     }
   }
 
-  // utils.writeJsonFile("./src/data/testProduct.json", products);
-  // utils.writeJsonFile("./src/data/testProductCost.json", productCostMap);
-
   const invoices = await fetchAllInvoices(
     accessTokenKiot,
-    utils.toIsoLike(from),
-    utils.toIsoLike(to),
+    toIsoLike(from),
+    toIsoLike(to),
     200
   );
 
-  utils.writeJsonFile("./src/data/invoices.json", invoices);
+  writeJsonFile("./src/data/invoices.json", invoices);
+
   const ids = invoices.map((inv) => inv.id);
-  const chunks = utils.chunkArray(ids, chunkSize);
+  const chunks = chunkArray(ids, chunkSize);
   const allInvoicesDetails = [];
 
   for (let i = 0; i < chunks.length; i++) {
@@ -57,11 +72,9 @@ export async function syncInvoicesToLark(
       `📦 Chunk ${chunkIndex}/${totalChunks} — ${group.length} invoices`
     );
 
-    const results = await utils.callWithRetry(
+    const results = await callWithRetry(
       () =>
-        Promise.all(
-          group.map((id) => kiotApi.getInvoicesDetail(accessTokenKiot, id))
-        ),
+        Promise.all(group.map((id) => getInvoicesDetail(accessTokenKiot, id))),
       retries, // dùng đúng tham số m truyền xuống cho có ý nghĩa
       retryDelay
     );
@@ -72,29 +85,27 @@ export async function syncInvoicesToLark(
 
     if (i < totalChunks - 1) {
       console.log(`⏳ Nghỉ ${chunkDelay}ms trước chunk tiếp theo…`);
-      await utils.delay(chunkDelay);
+      await delay(chunkDelay);
     }
   }
 
-  // utils.writeJsonFile("./src/data/invoicesDetail.json", allInvoicesDetails);
+  writeJsonFile("./src/data/allInvoicesDetails.json", allInvoicesDetails);
 
-  const invoiceFormatted = allInvoicesDetails.map((i) =>
-    utils.formatInvoice(i)
-  );
+  const invoiceFormatted = allInvoicesDetails.map((i) => formatInvoice(i));
 
   const allInvoiceDetailsFormatted = allInvoicesDetails.flatMap((inv) =>
-    utils.formatInvoiceDetail(inv, productCostMap)
+    formatInvoiceDetail(inv, productCostMap)
   );
 
-  // utils.writeJsonFile("./src/data/invoice_formatted.json", invoiceFormatted);
-  // utils.writeJsonFile(
-  //   "./src/data/invoice_detail_formatted.json",
-  //   allInvoiceDetailsFormatted
-  // );
+  writeJsonFile("./src/data/invoiceFormatted.json", invoiceFormatted);
+  writeJsonFile(
+    "./src/data/allInvoiceDetailsFormatted.json",
+    allInvoiceDetailsFormatted
+  );
 
   const ONE_DAY = 24 * 60 * 60 * 1000;
-  const timestampFrom = utils.vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
-  const timestampTo = utils.vnTimeToUTCTimestampMiliseconds(to) + ONE_DAY;
+  const timestampFrom = vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
+  const timestampTo = vnTimeToUTCTimestampMiliseconds(to) + ONE_DAY;
 
   await syncDataToLarkBaseFilterDate(
     larkClient,
@@ -102,9 +113,9 @@ export async function syncInvoicesToLark(
     {
       tableName: tableInvoiceName,
       records: invoiceFormatted,
-      fieldMap: utils.INVOICE_FIELD_MAP,
-      typeMap: utils.INVOICE_TYPE_MAP,
-      uiType: utils.INVOICE_UI_TYPE_MAP,
+      fieldMap: INVOICE_FIELD_MAP,
+      typeMap: INVOICE_TYPE_MAP,
+      uiType: INVOICE_UI_TYPE_MAP,
       currencyCode: "VND",
       idLabel: "ID hoá đơn",
     },
@@ -119,9 +130,9 @@ export async function syncInvoicesToLark(
     {
       tableName: tableInvoiceDetailName,
       records: allInvoiceDetailsFormatted,
-      fieldMap: utils.INVOICE_DETAIL_FIELD_MAP,
-      typeMap: utils.INVOICE_DETAIL_TYPE_MAP,
-      uiType: utils.INVOICE_DETAIL_UI_TYPE_MAP,
+      fieldMap: INVOICE_DETAIL_FIELD_MAP,
+      typeMap: INVOICE_DETAIL_TYPE_MAP,
+      uiType: INVOICE_DETAIL_UI_TYPE_MAP,
       currencyCode: "VND",
       idLabel: "ID",
       excludeUpdateField: excludeUpdateField,

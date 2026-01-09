@@ -489,3 +489,54 @@ export const CASHFLOW_UI_TYPE_MAP = {
   retailer_id: "Text",
   hash: "Text",
 };
+
+export const SUPPLIER_FIELD_MAP = {
+  id: "ID",
+  code: "Mã NCC",
+  createdDate: "Ngày tạo",
+  name: "Tên nhà cung cấp",
+  retailerId: "retailerId",
+  branchId: "branchId",
+  contactNumber: "Số điện thoại",
+  address: "Địa chỉ",
+  totalInvoiced: "Tổng mua",
+  totalInvoicedWithoutReturn: "Tổng mua trừ trả hàng",
+  debt: "Nợ NCC hiện tại",
+  createdBy: "Nhân sự",
+  isActive: "Đang hoạt động",
+  hash: "hash",
+};
+
+export const SUPPLIER_TYPE_MAP = {
+  id: 1,
+  code: 1,
+  createdDate: 5,
+  name: 1,
+  retailerId: 1,
+  branchId: 1,
+  contactNumber: 1,
+  address: 1,
+  totalInvoiced: 2,
+  totalInvoicedWithoutReturn: 2,
+  debt: 2,
+  createdBy: 1,
+  isActive: 1,
+  hash: 1,
+};
+
+export const SUPPLIER_UI_TYPE_MAP = {
+  id: "Text",
+  code: "Text",
+  createdDate: "DateTime",
+  name: "Text",
+  retailerId: "Text",
+  branchId: "Text",
+  contactNumber: "Text",
+  address: "Text",
+  totalInvoiced: "Currency",
+  totalInvoicedWithoutReturn: "Currency",
+  debt: "Currency",
+  createdBy: "Text",
+  isActive: "Text",
+  hash: "Text",
+};

@@ -1,9 +1,17 @@
-import * as utils from "../utils/index.js";
-import * as serviceKiot from "../services/kiot/index.js";
-import { syncDataToLarkBaseFilterDate } from "./syncToLarkFilterDate.js";
 import { larkClient } from "../core/larkbase-client.js";
-import { fetchAllCashflow } from "../services/kiot/fetchAllCashflow.js";
-import { formartCashflow } from "../utils/kiot/formatCashflow.js";
+import {
+  getAccessTokenEnvCloud,
+  fetchAllCashflow,
+} from "../services/kiot/index.js";
+import {
+  CASHFLOW_FIELD_MAP,
+  CASHFLOW_TYPE_MAP,
+  CASHFLOW_UI_TYPE_MAP,
+  formartCashflow,
+  vnTimeToUTCTimestampMiliseconds,
+  writeJsonFile,
+} from "../utils/index.js";
+import { syncDataToLarkBaseFilterDate } from "./syncToLarkFilterDate.js";
 
 export async function syncCashflowToLark(
   baseId,
@@ -12,18 +20,17 @@ export async function syncCashflowToLark(
   from,
   to
 ) {
-  const accessTokenKiot = await serviceKiot.getAccessTokenEnvCloud();
+  const accessTokenKiot = await getAccessTokenEnvCloud();
 
   const cashflows = await fetchAllCashflow(accessTokenKiot, from, to);
-
-  utils.writeJsonFile("./src/data/cashflows.json", cashflows);
-
   const cashflowFormarted = formartCashflow(cashflows);
-  utils.writeJsonFile("./src/data/cashflowFormarted.json", cashflowFormarted);
+
+  writeJsonFile("./src/data/cashflows.json", cashflows);
+  writeJsonFile("./src/data/cashflowFormarted.json", cashflowFormarted);
 
   const ONE_DAY = 24 * 60 * 60 * 1000;
-  const timestampFrom = utils.vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
-  const timestampTo = utils.vnTimeToUTCTimestampMiliseconds(to) + ONE_DAY;
+  const timestampFrom = vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
+  const timestampTo = vnTimeToUTCTimestampMiliseconds(to) + ONE_DAY;
 
   await syncDataToLarkBaseFilterDate(
     larkClient,
@@ -31,9 +38,9 @@ export async function syncCashflowToLark(
     {
       tableName: tableCustomerName,
       records: cashflowFormarted,
-      fieldMap: utils.CASHFLOW_FIELD_MAP,
-      typeMap: utils.CASHFLOW_TYPE_MAP,
-      uiType: utils.CASHFLOW_UI_TYPE_MAP,
+      fieldMap: CASHFLOW_FIELD_MAP,
+      typeMap: CASHFLOW_TYPE_MAP,
+      uiType: CASHFLOW_UI_TYPE_MAP,
       currencyCode: "VND",
       idLabel: "Id phiếu",
     },

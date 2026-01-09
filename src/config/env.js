@@ -1,26 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-/**
- * Tập hợp toàn bộ biến môi trường cấu hình cho hệ thống:
- * - TikTok Shop (Partner API)
- * - TikTok Ads API
- * - Lark Base
- * - KiotViet
- * - Database
- *
- * Các giá trị được load từ file .env thông qua dotenv.
- *
- * @typedef {Object} EnvConfig
- * @property {KiotVietEnv} KIOTVIET - Config KiotViet
- */
-
-/**
- * Cấu hình môi trường hệ thống, load từ file .env
- * @type {EnvConfig}
- */
 export const env = {
-  // KiotViet
+
   KIOT: {
     KIOTVIET_RETAILER: process.env.KIOTVIET_RETAILER,
     KIOTVIET_CLIENT_ID: process.env.KIOT_CLIENT_ID,
@@ -38,12 +20,13 @@ export const env = {
     TABLE_PRODUCT_NAME: process.env.LARK_TABLE_PRODUCT_NAME,
     TABLE_INVOICES_NAME: process.env.LARK_TABLE_INVOICE_NAME,
     TABLE_INVOICES_DETAIL_NAME: process.env.LARK_TABLE_INVOICE_DETAIL_NAME,
-    LARK_TABLE_INVOICE__FROM: process.env.LARK_TABLE_INVOICE__FROM,
-    LARK_TABLE_INVOICE__TO: process.env.LARK_TABLE_INVOICE__TO,
-    LARK_TABLE_CUSTOMER_NAME: process.env.LARK_TABLE_CUSTOMER_NAME,
-    LARK_TABLE_RETURN_NAME: process.env.LARK_TABLE_RETURN_NAME,
-    LARK_TABLE_RETURN_DETAILS_NAME: process.env.LARK_TABLE_RETURN_DETAILS_NAME,
-    LARK_TABLE_CASHFLOW_NAME: process.env.LARK_TABLE_CASHFLOW_NAME,
+    TABLE_INVOICE__FROM: process.env.LARK_TABLE_INVOICE__FROM,
+    TABLE_INVOICE__TO: process.env.LARK_TABLE_INVOICE__TO,
+    TABLE_CUSTOMER_NAME: process.env.LARK_TABLE_CUSTOMER_NAME,
+    TABLE_RETURN_NAME: process.env.LARK_TABLE_RETURN_NAME,
+    TABLE_RETURN_DETAILS_NAME: process.env.LARK_TABLE_RETURN_DETAILS_NAME,
+    TABLE_CASHFLOW_NAME: process.env.LARK_TABLE_CASHFLOW_NAME,
+    TABLE_SUPPLIERS_NAME: process.env.LARK_TABLE_SUPPLIERS_NAME,
   },
 
   AES_256_CBC: {

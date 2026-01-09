@@ -1,7 +1,7 @@
-import { getInvoices } from "../../core/kiot-api.js";
+import { getSuppliers } from "../../core/kiot-api.js";
 import { delay, callWithRetry } from "../../utils/index.js";
 
-export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
+export async function fetchAllSuppliers(accessToken, from, to, pageSize = 100) {
   let cursor = 0;
   let all = [];
   console.log(pageSize);
@@ -9,19 +9,20 @@ export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
   while (true) {
     const params = {
       pageSize,
-      fromPurchaseDate: from,
-      toPurchaseDate: to,
+      includeTotal: true,
+      includeSupplierGroup: true,
     };
 
     if (cursor) params.currentItem = cursor;
-    const res = await callWithRetry(() => getInvoices(accessToken, params));
+
+    const res = await callWithRetry(() => getSuppliers(accessToken, params));
 
     if (!res?.data || res.data.length === 0) break;
 
     all.push(...res.data);
 
     console.log(
-      `Fetched ${res.data.length}, total_page: ${all.length}, cursor=${cursor}, total_invoices=${res.total}`
+      `Fetched ${res.data.length}, total_page: ${all.length}, cursor=${cursor}, total_suppliers=${res.total}`
     );
 
     cursor = all.length;
@@ -29,6 +30,5 @@ export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
     if (res.data.length < pageSize) break;
     await delay(200);
   }
-
   return all;
 }

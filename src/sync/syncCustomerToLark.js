@@ -1,43 +1,50 @@
-import * as utils from "../utils/index.js";
-import * as serviceKiot from "../services/kiot/index.js";
-import { fetchAllCustomers } from "../services/kiot/fetchAllCustomer.js";
-import { syncDataToLarkBaseFilterDate } from "./syncToLarkFilterDate.js";
 import { larkClient } from "../core/larkbase-client.js";
-import { formartCustomer } from "../utils/kiot/formatCustomer.js";
+import {
+  getAccessTokenEnvCloud,
+  fetchAllCustomers,
+} from "../services/kiot/index.js";
+import {
+  CUSTOMER_FIELD_MAP,
+  CUSTOMER_TYPE_MAP,
+  CUSTOMER_UI_TYPE_MAP,
+  formartCustomer,
+  writeJsonFile,
+  vnTimeToUTCTimestampMiliseconds,
+} from "../utils/index.js";
+import { syncDataToLarkBaseFilterDate } from "./syncToLarkFilterDate.js";
 
 export async function syncCustomerToLark(
   baseId,
   tableCustomerName,
   fieldFilterDate,
   from,
-  to,
+  to
 ) {
-  const accessTokenKiot = await serviceKiot.getAccessTokenEnvCloud();
+  const accessTokenKiot = await getAccessTokenEnvCloud();
 
   const customers = await fetchAllCustomers(accessTokenKiot);
-
-  utils.writeJsonFile("./src/data/customers.json", customers);
-
   const customerFormarted = formartCustomer(customers);
 
+  writeJsonFile("./src/data/customers.json", customers);
+
   const ONE_DAY = 24 * 60 * 60 * 1000;
-  const timestampFrom = utils.vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
-  const timestampTo = utils.vnTimeToUTCTimestampMiliseconds(to) + ONE_DAY;
+  const timestampFrom = vnTimeToUTCTimestampMiliseconds(from) - ONE_DAY;
+  const timestampTo = vnTimeToUTCTimestampMiliseconds(to) + ONE_DAY;
 
   await syncDataToLarkBaseFilterDate(
-      larkClient,
-      baseId,
-      {
-        tableName: tableCustomerName,
-        records: customerFormarted,
-        fieldMap: utils.CUSTOMER_FIELD_MAP,
-        typeMap: utils.CUSTOMER_TYPE_MAP,
-        uiType: utils.CUSTOMER_UI_TYPE_MAP,
-        currencyCode: "VND",
-        idLabel: "ID",
-      },
-      fieldFilterDate,
-      timestampFrom,
-      timestampTo
-    );
+    larkClient,
+    baseId,
+    {
+      tableName: tableCustomerName,
+      records: customerFormarted,
+      fieldMap: CUSTOMER_FIELD_MAP,
+      typeMap: CUSTOMER_TYPE_MAP,
+      uiType: CUSTOMER_UI_TYPE_MAP,
+      currencyCode: "VND",
+      idLabel: "ID",
+    },
+    fieldFilterDate,
+    timestampFrom,
+    timestampTo
+  );
 }
