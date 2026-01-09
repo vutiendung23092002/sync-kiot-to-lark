@@ -17,3 +17,4 @@ export * from "./kiot/formatInvoice.js";
 export * from "./kiot/formatProducts.js";
 export * from "./kiot/formatReturn.js";
 export * from "./kiot/formatSuppliers.js";
+export * from "./kiot/formatPurchaseOrders.js";

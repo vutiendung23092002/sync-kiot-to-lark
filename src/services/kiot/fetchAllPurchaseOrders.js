@@ -1,26 +1,29 @@
-import { getInvoices } from "../../core/kiot-api.js";
+import { getPurchaseOrders } from "../../core/kiot-api.js";
 import { delay, callWithRetry } from "../../utils/index.js";
 
-export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
+export async function fetchAllPurchaseOrders(accessToken, from, to, pageSize = 100) {
   let cursor = 0;
   let all = [];
-
+ 
   while (true) {
     const params = {
       pageSize,
+      includePayment: true,
+      includeOrderDelivery: true,
       fromPurchaseDate: from,
       toPurchaseDate: to,
     };
 
     if (cursor) params.currentItem = cursor;
-    const res = await callWithRetry(() => getInvoices(accessToken, params));
+
+    const res = await callWithRetry(() => getPurchaseOrders(accessToken, params));
 
     if (!res?.data || res.data.length === 0) break;
 
     all.push(...res.data);
 
     console.log(
-      `Fetched ${res.data.length}, total_page: ${all.length}, cursor=${cursor}, total_invoices=${res.total}`
+      `Fetched ${res.data.length}, total_page: ${all.length}, cursor=${cursor}, total_purchase_orders=${res.total}`
     );
 
     cursor = all.length;
@@ -28,6 +31,5 @@ export async function fetchAllInvoices(accessToken, from, to, pageSize = 200) {
     if (res.data.length < pageSize) break;
     await delay(200);
   }
-
   return all;
 }

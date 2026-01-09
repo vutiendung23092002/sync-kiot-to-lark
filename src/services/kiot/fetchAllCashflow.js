@@ -4,7 +4,6 @@ import { delay, callWithRetry } from "../../utils/index.js";
 export async function fetchAllCashflow(accessToken, from, to, pageSize = 100) {
   let cursor = 0;
   let all = [];
-  console.log(pageSize);
 
   while (true) {
     const params = {

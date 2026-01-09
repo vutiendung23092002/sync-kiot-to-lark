@@ -130,3 +130,18 @@ export async function getSuppliers(accessToken, params) {
 
   return res;
 }
+
+export async function getPurchaseOrders(accessToken, params) {
+  const headers = {
+    Retailer: env.KIOT.KIOTVIET_RETAILER,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  const res = await http.get(API_PATHS.KIOT_GET_PURCHASEORDERS, {
+    baseURL: KIOT_PUBLIC_URL,
+    headers,
+    params,
+  });
+
+  return res;
+}

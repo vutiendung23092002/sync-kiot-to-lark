@@ -11,4 +11,5 @@ export const API_PATHS = {
     KIOT_CASH_FLOWS: "/cashflow",
     KIOT_GET_RETURNS: "/returns",
     KIOT_GET_SUPPLIERS: "/suppliers",
+    KIOT_GET_PURCHASEORDERS: "/purchaseorders",
 };
