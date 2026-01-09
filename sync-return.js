@@ -1,5 +1,5 @@
 import { env } from "./src/config/env.js";
-import { syncReturnToLark } from "./src/sync/syncReturnToLark.js";
+import { syncReturnToLark } from "./src/sync/syncReturnsToLark.js";
 
 async function syncReturns() {
   const baseId = env.LARK.BASE_ID;
