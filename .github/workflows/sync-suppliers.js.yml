@@ -5,7 +5,7 @@ name: Node.js CI sync suppliers to lark
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/20 * * * *"
   workflow_dispatch:
 
 jobs:
