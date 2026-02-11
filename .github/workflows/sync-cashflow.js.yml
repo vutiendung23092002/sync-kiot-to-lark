@@ -32,7 +32,7 @@ jobs:
           KIOTVIET_RETAILER: ${{ secrets.KIOTVIET_RETAILER }}
           LARK_APP_ID: ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL_NEON_DB: ${{ secrets.DATABASE_URL_NEON_DB }}
           DATABASE_SERVICE_KEY: ${{ secrets.DATABASE_SERVICE_KEY }}
           AES_256_CBC_APP_SECRET_KEY: ${{ secrets.AES_256_CBC_APP_SECRET_KEY }}
           LARK_BASE_ID: ${{ vars.LARK_BASE_ID }}
