@@ -8,9 +8,19 @@ export const env = {
     KIOTVIET_CLIENT_ID: process.env.KIOT_CLIENT_ID,
     KIOTVIET_CLIENT_SECRET: process.env.KIOT_SECRET,
   },
+  
+  KIOT_OLD: {
+    KIOTVIET_RETAILER: process.env.KIOTVIET_RETAILER_OLD,
+    KIOTVIET_CLIENT_ID: process.env.KIOT_CLIENT_ID_OLD,
+    KIOTVIET_CLIENT_SECRET: process.env.KIOT_SECRET_OLD,
+  },
 
   SUPABASE: {
     SERVICE_KEY: process.env.DATABASE_SERVICE_KEY,
+  },
+
+  NEONDB: {
+    DATABASE_URL: process.env.DATABASE_URL_NEON_DB,
   },
 
   LARK: {

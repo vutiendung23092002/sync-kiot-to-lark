@@ -12,6 +12,7 @@
   "type": "module",
   "dependencies": {
     "@larksuiteoapi/node-sdk": "^1.55.0",
+    "@neondatabase/serverless": "^1.0.2",
     "@supabase/supabase-js": "^2.86.0",
     "axios": "^1.13.2",
     "crypto": "^1.0.1",

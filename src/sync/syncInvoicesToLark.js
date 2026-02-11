@@ -37,7 +37,7 @@ export async function syncInvoicesToLark(
   retries
 ) {
   const accessTokenKiot = await getAccessTokenEnvCloud();
-
+  
   const products = await fetchAllProducts(accessTokenKiot, {
     includeInventory: true,
   });
